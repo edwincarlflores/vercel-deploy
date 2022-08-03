@@ -14,7 +14,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const url = process.env.VERCEL_DEPLOY_HOOK_URL || "";
+  const url = process.env.DEPLOY_HOOK_URL || "";
   const { api_key: apiKey } = req.query;
 
   if (!url) {
