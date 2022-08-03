@@ -13,6 +13,7 @@ const Home: NextPage = () => {
   const buttonText = process.env.NEXT_PUBLIC_BUTTON_TEXT || "Deploy";
   const successMessage =
     process.env.NEXT_PUBLIC_SUCCESS_MESSAGE || "Deployed Successfully!";
+  const subSuccessMessage = process.env.NEXT_PUBLIC_SUB_SUCCESS_MESSAGE || "";
 
   const deploy = async () => {
     setSuccess(false);
@@ -39,10 +40,29 @@ const Home: NextPage = () => {
 
       <main>
         {siteKey === process.env.NEXT_PUBLIC_SITE_KEY ? (
-          <>
-            <button onClick={deploy}>{buttonText}</button>
-            {success && <div>{successMessage}</div>}
-          </>
+          <div className="grid place-items-center mt-6">
+            <button
+              onClick={deploy}
+              className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+            >
+              {buttonText}
+            </button>
+            {success && (
+              <div
+                className="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md mt-4"
+                role="alert"
+              >
+                <div className="flex">
+                  <div>
+                    <p className="font-bold">{successMessage}</p>
+                    {subSuccessMessage && (
+                      <p className="text-sm">{subSuccessMessage}</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         ) : (
           <h2>You are not authorized to access this page</h2>
         )}
