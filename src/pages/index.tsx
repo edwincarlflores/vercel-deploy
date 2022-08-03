@@ -13,7 +13,6 @@ const Home: NextPage = () => {
   const buttonText = process.env.NEXT_PUBLIC_BUTTON_TEXT || "Deploy";
   const successMessage =
     process.env.NEXT_PUBLIC_SUCCESS_MESSAGE || "Deployed Successfully!";
-  const subSuccessMessage = process.env.NEXT_PUBLIC_SUB_SUCCESS_MESSAGE || "";
 
   const deploy = async () => {
     setSuccess(false);
@@ -41,27 +40,42 @@ const Home: NextPage = () => {
       <main>
         {siteKey === process.env.NEXT_PUBLIC_SITE_KEY ? (
           <div className="grid place-items-center mt-6">
+            {success && (
+              <div
+                className="alert bg-teal-100 border-t-4 border-teal-500 rounded-b rounded-lg py-5 px-6 mb-3 text-base text-teal-900 inline-flex items-center mt-4"
+                role="alert"
+              >
+                <strong className="mr-1">{successMessage}</strong>
+                <button
+                  onClick={() => {
+                    setSuccess(false);
+                  }}
+                  className="bg-transparent rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 focus:outline-none"
+                >
+                  <svg
+                    className="h-6 w-6"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </div>
+            )}
             <button
               onClick={deploy}
               className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
             >
               {buttonText}
             </button>
-            {success && (
-              <div
-                className="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md mt-4"
-                role="alert"
-              >
-                <div className="flex">
-                  <div>
-                    <p className="font-bold">{successMessage}</p>
-                    {subSuccessMessage && (
-                      <p className="text-sm">{subSuccessMessage}</p>
-                    )}
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
         ) : (
           <h2>You are not authorized to access this page</h2>
