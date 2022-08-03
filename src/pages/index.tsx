@@ -42,7 +42,7 @@ const Home: NextPage = () => {
           <div className="grid place-items-center mt-6">
             {success && (
               <div
-                className="alert bg-teal-100 border-t-4 border-teal-500 rounded-b rounded-lg py-5 px-6 mb-3 text-base text-teal-900 inline-flex items-center mt-4"
+                className="alert bg-teal-100 border-t-4 border-teal-500 rounded-b rounded-lg py-5 px-6 mb-3 text-base text-teal-900 inline-flex items-center"
                 role="alert"
               >
                 <strong className="mr-1">{successMessage}</strong>
